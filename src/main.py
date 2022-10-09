@@ -2,6 +2,8 @@ from HttpClient import HttpClient
 from utils import create_page_index
 import re
 import config
+from model import MovieEntry
+from Processor import Processor
 
 class NetflixCrawler:
     def __init__(self):
@@ -15,8 +17,12 @@ class NetflixCrawler:
             self.indexed_home_page.extend(self.indexed_url_generator(index_page_url))
         print(self.indexed_home_page)
         for index_page_url in self.indexed_home_page:
-            for individual_url_suffix in self._individual_url_generator(HttpClient(index_page_url).get_soup()):
-                print(config.INDIVIDUAL_URL_PREFIX+individual_url_suffix)
+            for item_url_suffix in self._individual_url_generator(HttpClient(index_page_url).get_soup()):
+                item_url = config.INDIVIDUAL_URL_PREFIX + item_url_suffix
+                item_url_soup = HttpClient(item_url).get_soup()
+                item_entry_record = MovieEntry(item_url)
+                item_processor = Processor(item_url_soup, item_entry_record)
+                item_processor.proces_and_record()
                 break
 
     def indexed_url_generator(self, index_page):
