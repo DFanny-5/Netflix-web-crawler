@@ -27,7 +27,9 @@ class NetflixCrawler:
             for item_url_suffix in self._individual_url_generator(HttpClient(index_page_url).get_soup()):
                 item_url = config.INDIVIDUAL_URL_PREFIX + item_url_suffix
                 item_url_soup = HttpClient(item_url).get_soup()
-                item_entry_record = MovieEntry(item_url, next(new_id))
+                serial_id = next(new_id)
+                print(item_url)
+                item_entry_record = MovieEntry(item_url, serial_id)
                 item_processor = Processor(item_url_soup, item_entry_record)
                 entry_record = item_processor.proces_and_record()
                 data_serializer.add_entry(entry_record)

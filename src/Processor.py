@@ -17,7 +17,6 @@ class Processor:
         self.record.original_language = self.generate_original_language()
         self.record.subtitle = self.generate_subtitle()
         self.record.description = self.generate_description()
-        #print('the recorded result is', self.record)
         return self.record
 
     @ErrorHandler.handle_scrap_error
