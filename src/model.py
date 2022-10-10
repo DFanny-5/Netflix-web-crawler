@@ -1,7 +1,8 @@
 class MovieEntry:
-    def __init__(self, page_url):
+
+    def __init__(self, page_url, item_id):
         self.page_url = page_url
-        self.id = None
+        self.id = item_id
         self.title = None
         self.genre = None
         self.cast = None
@@ -12,6 +13,8 @@ class MovieEntry:
         self.added_year = None
         self.parent_control = None
         self.original_language = None
+        self.subtitle = None
+        self.description = None
 
     def __str__(self):
         return str(vars(self))

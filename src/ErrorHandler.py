@@ -7,6 +7,6 @@ class ErrorHandler:
                 return f(*args, **kw)
             except Exception:
                 print('I am triggered')
-                return None
+                return 'None'
 
         return wrapper
